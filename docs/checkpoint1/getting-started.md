@@ -1,11 +1,26 @@
 ## How to setup your local development environment
+
+
 ### 1. Install Ruby
 You need to install Ruby. We recommend you use [rvm](https://rvm.io/) but you could also use [rbenv](https://github.com/rbenv/rbenv) to manage Ruby version.
+
 These are environment management tools that help you switch between Ruby version easily across different projects.
 Once you install one of these tools, you need to install the Ruby version listed in [Gemfile](../Gemfile).
 
-After installing rvm or rbenv, you need to check that it is loaded in you current terminal.
-You can do so by checking the version of your specific ruby env manager. 
+First, run:
+```shell script
+gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+```
+
+Then, the command to install `rvm` is:
+
+```shell script
+curl -sSL https://get.rvm.io | bash -s stable --ruby
+```
+
+After installing rvm or rbenv, you need to check that it is loaded in you current terminal. **Refresh Codio** at this point for your `rvm` installation to take effect.
+
+You can do so by checking the version of your specific ruby env manager.
 For example if you opt for rvm:
 ```shell script
 rvm -v
@@ -18,13 +33,21 @@ source ~/.bashrc
 
 For example, if you are using rvm run the following commands.
 ```shell script
-rvm install 2.5.6
-rvm use 2.5.6
+rvm install 2.6.5
+rvm use 2.6.5
 ```
-Remember to replace the version 2.5.6 with the ruby version in .ruby-version file linked above.
 
 ### 2. Install Node
 Similarly, you need to install Node and we would recommend that you use [nvm](https://github.com/nvm-sh/nvm) which allows you to manage multiple active Node.js versions.
+
+The command to install `nvm` is:
+
+```shell script
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.0/install.sh | bash
+```
+
+After installing `nvm`, you need to check that it is loaded in you current terminal. **Refresh Codio** at this point for your `nvm` installation to take effect.
+
 The specific version of node you need to install is listed in [package.json](../package.json) under the [JSON path](https://github.com/json-path/JsonPath) `$.engines.node`.
 
 Example use of nvm to install node version `12.13.1`:
@@ -53,12 +76,12 @@ First, to install ruby dependencies. [RubyGems](https://rubygems.org/) is a depe
 We recommend you install your ruby dependencies within the project's `vendor/bundle` folder instead globally within you ruby installation.
 To do this, run the following command:
 ```shell script
-bundle config set path vendor/bundle 
+bundle config set path vendor/bundle
 ```
 
 The command above would imply that you will be required to run all ruby commands with the `bundle exec` prefix.
 For example, to run a migration (which we will do shortly), you must execute the command `bundle exec rails db:migrate` instead of `rails db:migrate`.
-Some may find this tedious, hence we suggest an option to alias the `bundle exec` prefix. 
+Some may find this tedious, hence we suggest an option to alias the `bundle exec` prefix.
 You could run `alias be="bundle exec"` on your terminal which will allow you to run `be rails db:migrate` instead of the more verbose `bundle exec rails db:migrate`.
 You could add the alias to your shell profile eg. `~/.bashrc` to make it globally available.
 
@@ -68,9 +91,15 @@ bundle config set without production
 ```
 
 Next, run the following command to install dependencies listed in the [Gemfile](../Gemfile).
-A Gemfile is a file that list all of a Ruby project's dependencies. 
+A Gemfile is a file that list all of a Ruby project's dependencies.
 The [Gemfile.lock](../Gemfile.lock) pins the dependencies listed in the Gemfile to specific versions alongside their specific transitive dependencies.
 Pinning dependencies helps different developers working on the same project have reproducible builds.
+
+First, install our desired version of the `bundler` gem, as well as installing a library that will allow us to use Postgres to install correctly. Run the following commands:
+```shell script
+gem install bundler:2.1.4
+sudo apt-get install -y libpq-dev
+```
 
 The following command will install all the requirements in the `Gemfile.lock`.
 It may take a while since some of the dependencies are Ruby extensions written in C, eg. Nokogiri.
@@ -80,10 +109,10 @@ bundle install
 
 After all the gems are installed, we now need to install the javascript requirements.
 Node projects have a package.json file that serves the same purpose as Gemfile, but for Javascript dependencies. It lists all project dependencies.
-[yarn.lock](../yarn.lock) and `package-lock.json` serve the same role as `Gemfile.lock`, they pin dependencies. 
+[yarn.lock](../yarn.lock) and `package-lock.json` serve the same role as `Gemfile.lock`, they pin dependencies.
 Yarn uses `yarn.lock` whereas npm uses `package-lock.json`. This project uses `yarn.lock` since it uses yarn.
 Projects that use npm have `package-lock.json` instead. It is highly advised that you only have one of these and not both
-in your project since they may diverge and lead to inconsistent environments for different developers. 
+in your project since they may diverge and lead to inconsistent environments for different developers.
 You will notice that `package-lock.json` is git-ignored in [.gitignore](../.gitignore).
 
 To install javascript requirements, we will ran the following command:
@@ -109,22 +138,22 @@ bundle exec rails db:seed
 Finally, it is time to launch the rails application and begin hacking away.
 There are two ways to do this. The first option is that you could launch the application using the following bundle command.
 ```shell script
-bundle exec rails s
+bundle exec rails s -b 0.0.0.0
 ```
 
-However, this option has one major downside. It takes long for any changes that you make to reflect on the browser since 
+However, this option has one major downside. It takes long for any changes that you make to reflect on the browser since
 you will not have live reload.
 
 The second option, is to have two terminals. In one terminal, run the following command:
 ```shell script
-bin/webpacker-dev-server
-``` 
+bin/webpack-dev-server
+```
 
 This will launch a `webpacker` instance that live reloads your browser as you edit the javascript code or CSS styles and makes the development process much faster.
 
-After launching `webpacker-dev-server` on one terminal, switch to the second terminal window and launch a rails server.
+After launching `webpack-dev-server` on one terminal, switch to the second terminal window and launch a rails server.
 ```shell script
-bundle exec rails s
+bundle exec rails s -b 0.0.0.0
 ```
 
 Next, you should read about [linters](./linters.md).
