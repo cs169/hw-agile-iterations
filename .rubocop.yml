@@ -8,6 +8,7 @@ AllCops:
       - 'node_modules/**/*'
       - 'vendor/**/*'
       - 'db/seed_data.rb'
+      - 'db/seeds.rb'
       - 'db/schema.rb'
       - 'config/routes.rb'
 

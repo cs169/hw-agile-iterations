@@ -11,7 +11,7 @@ require_relative '../task_helpers/state_consistency_checker'
 require_relative '../../lib/task_helpers/state_shapefile_request'
 require_relative '../../db/seed_data'
 
-Rails.logger = Logger.new(STDOUT)
+Rails.logger = Logger.new($stdout)
 Rails.logger.level = Logger::INFO
 
 namespace :states do

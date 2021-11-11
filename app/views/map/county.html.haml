@@ -2,7 +2,7 @@
     .col-12
         %section.my-4
             %h2.text-center
-                = @county.name + ', ' + @state.symbol
+                = `#{@county.name}, #{@state.symbol}`
             .overflow-hidden.bg-light.text-center.mb-3
                 .overflow-auto.py-3
                     %svg.d-inline#actionmap-state-counties-view{ version: 1.1, xmlns: 'http://www.w3.org/2000/svg' }

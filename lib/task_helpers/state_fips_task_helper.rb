@@ -31,7 +31,11 @@ class StateFipsTaskHelper
                         "/st#{state[:fips_code]}_#{state_symbol}_cou.txt"
 
         Rails.logger.info "Fetched fips data for #{state_symbol} via #{state_url}"
-        fips_csv_to_hash URI.open(state_url).read
+        File.open(state_url)
+        IO.popen(state_url)
+        URI.parse(state_url).open
+        # possible bug
+        fips_csv_to_hash URI.parse(state_url).read
     end
 
     def self.update(state_fips_array, to_replace, replacement)

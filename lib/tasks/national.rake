@@ -2,7 +2,7 @@
 
 require_relative '../task_helpers/national_shapefile_request'
 
-Rails.logger = Logger.new(STDOUT)
+Rails.logger = Logger.new($stdout)
 Rails.logger.level = Logger::INFO
 namespace :national do
     desc 'Download Shapefile describing US States and convert to topojson.'
