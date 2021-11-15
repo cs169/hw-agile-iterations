@@ -73,6 +73,10 @@ group :development, :test do
     # Report coverage.
     gem 'codecov', require: false
     gem 'simplecov'
+
+    # Accessibility Testing
+    gem 'axe-core-cucumber'
+    gem 'axe-core-rspec'
 end
 
 group :development do
