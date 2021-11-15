@@ -14,8 +14,6 @@ gem 'puma', '~> 3.11'
 gem 'webpacker', '5.1.1'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
-# Use figaro to easily manage config across environments
-gem 'figaro'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 # Use third party sign on authenticate users
@@ -91,7 +89,6 @@ end
 group :production do
     # Use postgresql as the database for Active Record in production (Heroku)
     gem 'pg', '>= 0.18', '< 2.0'
-    gem 'rails_12factor'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
