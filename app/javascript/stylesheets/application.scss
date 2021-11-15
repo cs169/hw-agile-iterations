@@ -1,9 +1,14 @@
 // Override Bootstrap's default colors.
 
+// Berkeley Blue
 $blue: #003262;
+// "Pacific" from brand.berkeley.edu
+// Has High Enough color contrast with white.
+$pacific: #46535E;
 
 $theme-colors: (
   "primary": $blue,
+  "info": $pacific,
 );
 
 /** Import Base Bootsrap _after_ our variables. */
