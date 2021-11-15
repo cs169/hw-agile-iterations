@@ -7,8 +7,8 @@
         "lib": "lib"
     },
     "engines": {
-        "node": "12.13.1",
-        "yarn": "1.22.4"
+        "node": ">=12.13.1",
+        "yarn": ">=1.22.4"
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.13.0",
