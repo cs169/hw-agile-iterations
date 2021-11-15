@@ -1,7 +1,7 @@
 // A Bootswatch Cosmo navbar
 // https://bootswatch.com/cosmo/
 
-%nav.navbar.navbar-expand-lg.navbar-dark.bg-primary#navbar
+%nav.navbar.navbar-expand-lg.navbar-dark.bg-dark#navbar
     %a.navbar-brand{ href: root_path.to_s } Actionmap
     %button.navbar-toggler{ 'aria-controls': 'navbar-links-container', 'aria-expanded': 'false',
     'aria-label': 'Toggle navigation', 'data-target': '#navbar-links-container',
@@ -27,5 +27,3 @@
                         Login
                         - if current_page? login_path
                             %span.sr-only (current)
-
-

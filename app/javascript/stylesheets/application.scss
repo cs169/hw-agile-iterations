@@ -1,10 +1,21 @@
+// Override Bootstrap's default colors.
+
+$blue: #003262;
+
+$theme-colors: (
+  "primary": $blue,
+);
+
+/** Import Base Bootsrap _after_ our variables. */
+@import "node_modules/bootstrap/scss/bootstrap";
+
 /** Bootstrap Sass Overrides can be added before importing bootstrap and other custom themes. */
 @import "~bootswatch/dist/cosmo/variables";
 @import "~bootstrap/scss/bootstrap.scss";
 @import "~bootswatch/dist/cosmo/bootswatch";
 
 path {
-    fill: #ccc;
+    fill: #aaa;
     stroke: #fff;
     stroke-width: .5px;
 }

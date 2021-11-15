@@ -15,13 +15,15 @@
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
+import 'bootstrap';
+
 // require('@rails/ujs').start();
 require('turbolinks').start();
 
 require('jquery');
 require('timeago');
-require('bootstrap');
 require('select2');
+
 
 // Import our customized bootstrap styles
 require('../stylesheets/application.scss');
