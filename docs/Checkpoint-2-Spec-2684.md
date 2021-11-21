@@ -1,4 +1,3 @@
-## Checkpoint 2 Spec
 
 ### App Overview
 
@@ -6,7 +5,7 @@ ActionMap seeks to provide an integrated, seamless, and shareable platform that 
 
 One of the big emphasis on this project is that there will be very little hand-holding. We’ll start you off with some legacy code, which will be a basic Rails app with a few models already implemented, an external API being used (namely the Google Civic Information API), Javascript code for the map, and an asset pipeline (Webpacker).
 
-Another important part: testing! Throughout this whole project, you’ll be expected to add tests where you see fit, leveraging both BDD with Cucumber and Capybara, as well as TDD with RSpec. CHIPS 7.7 & 8.9, as well as Quiz 4 are great resources to look at when deciding what is testable, and with which technique. When it comes to stubbing external APIs (a big portion of this project), we’ll give you some extra tips on how to do so.
+Another important part: testing! Throughout this whole project, you’ll be expected to add tests where you see fit, leveraging both BDD with Cucumber and Capybara, as well as TDD with RSpec. CHIPS 7.7 & 8.5, as well as Quiz 4 are great resources to look at when deciding what is testable, and with which technique. When it comes to stubbing external APIs (a big portion of this project), we’ll give you some extra tips on how to do so.
 
 For now, add `gem 'cucumber-rails-training-wheels'` *under* `gem 'cucumber-rails', require: false` on line 54 in your `Gemfile`. Then run `bundle install`.
 
@@ -30,16 +29,14 @@ Once on a particular place’s representatives list, a user can view any one rep
 The Representatives model is the first thing we’ll be working on as part of this app. It has some basic functionality; however, there’s much to be desired.
 
 Let’s take a look at what’s already there:
-We have a `representative` MVC structure already laid out. Take a look in app/views/representatives, app/models, and app/controllers.
-A basic `representative` database model. This includes the representative name, OCD (Open Civic Data) ID, and office/title.
-An association with `news_items`. As you can see, a `representative` has_many `news_items`.  
-RepresentativesController and SearchController. The SearchController handles calling the Google Civic API.
+
+We have a `representative` MVC structure already laid out. Take a look in app/views/representatives, app/models, and app/controllers. A basic `representative` database model. This includes the representative name, OCD (Open Civic Data) ID, and office/title. An association with `news_items`. As you can see, a `representative` has_many `news_items`. 
+
+We also provide RepresentativesController and SearchController. The SearchController handles calling the Google Civic API. Below is the schema for `representative` model.
 
 | OCD ID | Representative Name | Representative Title | Created At | Updated At
 | :------------- | :------------- | :------------- | :------------- | :------------- |
 For use with Google Civic API | For use with Google Civic API | For use with Google Civic API | Auto-generated | Auto-generated
-
-This is the preliminary database model for our App.
 
 **TASK 1**: Refactoring Legacy Code
 
@@ -74,11 +71,11 @@ On Heroku:
     * This information will come from the Google Civic Information API. See the Representatives controller and model for a basic implementation of getting some fields.
     * This will involve adding to the existing migration for the `representatives` model, so you can store the new information.
     * You’ll also need to make the representative’s Profile page look good! Don’t spend too much time styling, but you do have access to the full powers of [Bootstrap](https://getbootstrap.com/)! It should look usable when users come to your site. Be creative!
-* **Testing**: Refer to ESaaS Chapter 8 Section 4 (Stubbing the Internet), and this unreleased [CHIPS assignment](https://github.com/saasbook/hw-rspec-rails-intro/blob/master/part4.md), which serves as a walkthrough for how to mock out web requests. Use these two resources to add RSpec tests that increase coverage for this portion of the app.
+* **Testing**: Refer to ESaaS Chapter 8 Section 4 (Stubbing the Internet), and CHIPS 8.5 & 8.9. Use these resources to add RSpec tests that increase coverage for this portion of the app.
 
 ### Part 2: The Counties Map
 
-For this part, you should explore the interconnectivity between the various controllers, models, and views that allow the app to search the Google Civic Information API. Starting in views/representatives/index.html.haml, trace the search code all the way to views/representatives/search.html.haml. Also, read [understand the code](./understanding-the-code.md) to see how the map works in JavaScript.
+For this part, you should explore the interconnectivity between the various controllers, models, and views that allow the app to search the Google Civic Information API. Starting in views/representatives/index.html.haml, trace the search code all the way to views/representatives/search.html.haml. You may refer back to the previous page to see how the map works in JavaScript.
 
 Understanding this will make the next task much easier.
 
@@ -95,3 +92,4 @@ Ensure you are also writing proper tests in Cucumber for map actions.
 **TASK 4**: Use this opportunity to increase code coverage for your app. Use CodeCov to monitor your per-file code coverage.
 
 As noted in the iteration instructions, test coverage should exceed 85% for any files in the `/app` directory you are asked to modify or create in the tasks above. The coverage for `/app` overall should be greater than or equal to 70%.
+
